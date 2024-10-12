@@ -1,24 +1,23 @@
 import React, { Component } from 'react'
-import ProfileHeader from '../components/ProfileHeader'
+import Header from '../components/Header'
+import Task from '../components/Task'
 
 export class Main extends Component {
     render() {
         return (
-            <div className='bg-neutral-800 h-32 flex items-center'>
-                <div className='flex flex-row justify-start'>
-                    <div className='flex flex-col ml-8'>
-                        <ProfileHeader />
+            <>
+                <Header />
+                <div className='flex flex-row min-h-screen pt-32'>
+                    <div className='flex flex-col basis-3/4'>
+                        <h2 className='text-white text-3xl p-8'>Co-Workers</h2>
                     </div>
-                    <div className='flex flex-col ml-8'>
-                        <textarea
-                            className='bg-white text-black p-2 rounded'
-                            placeholder='Enter your text here...'
-                            rows='2'
-                            cols='50'
-                        />
+                    <div className='flex flex-col bg-blue-400 min-h-screen basis-1/4'>
+                        <h2 className='text-white text-3xl text-center p-8'>Tasks</h2>
+                        <Task />
+                        <Task />
                     </div>
                 </div>
-            </div>
+            </>
         )
     }
 }

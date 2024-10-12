@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 :root {
   background: #313131;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  color: #fff;
 }
 
 @font-face {
@@ -16,10 +23,23 @@
   src: url('/src/fonts/ryzes.ttf');
 }
 
+@font-face {
+  font-family: 'Cyberwar';
+  src: url('/src/fonts/cyberwar.ttf');
+}
+
 .font-dystopian {
   font-family: 'Dystopian';
 }
 
 .font-ryzes {
   font-family: 'Ryzes';
+}
+
+.font-cyberwar {
+  font-family: 'Cyberwar';
+}
+
+.font-roboto-mono {
+  font-family: 'Roboto Mono', monospace;
 }
