@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-const Dropdown = () => {
+const Dropdown = ({onStatusChange}) => {
     const [selectedOption, setSelectedOption] = useState('available');
 
     const handleSelect = (color) => {
         setSelectedOption(color);
+        onStatusChange(color);
     };
 
     return (
@@ -14,9 +15,9 @@ const Dropdown = () => {
                 onChange={(e) => handleSelect(e.target.value)}
                 className='bg-neutral-700 rounded'
             >
-                <option value="available">Available</option>
-                <option value="busy">Busy</option>
-                <option value="unavailable">Unavailable</option>
+                <option value="Available">Available</option>
+                <option value="Busy">Busy</option>
+                <option value="Unavailable">Unavailable</option>
 
             </select>
         </div >
