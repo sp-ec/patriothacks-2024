@@ -19,7 +19,8 @@ app.use((req, res, next) => {
 });
 
 //const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`;
-const urlDB = `${MySQL.MYSQL_URL}`;
+const urlDB = process.env.MYSQL_PUBLIC_URL;
+console.log(urlDB);
 const db = mysql.createConnection({ urlDB });
 
 db.connect((err) => {
