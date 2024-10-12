@@ -11,6 +11,8 @@ function Main() {
     useEffect(() => {
         // Fetch comments from the database and update the state
         // Example code:
+        console.log(search);
+        console.log("Fetching users...");
         const fetchUsers = async () => {
             try {
                 fetch('https://backend-production-bc79.up.railway.app/users?name=' + search)
@@ -26,7 +28,7 @@ function Main() {
         };
 
         fetchUsers([search]);
-    }, []);
+    }, [search]);
 
     return (
         <>
