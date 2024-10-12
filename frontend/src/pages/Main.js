@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import Task from '../components/Task'
 import WorkerStatus from '../components/WorkerStatus'
@@ -7,15 +7,18 @@ import { motion } from "framer-motion"
 
 function Main() {
 
+    const [users, setUsers] = useState([]);
+    const [search, setSearch] = useState('');
+
     useEffect(() => {
         // Fetch comments from the database and update the state
         // Example code:
         const fetchUsers = async () => {
             try {
-                fetch('https://backend-production-bc79.up.railway.app/users')
+                fetch('https://backend-production-bc79.up.railway.app/users?name=' + search)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data);
+                        setUsers(data);
                     })
 
             } catch (error) {
@@ -41,12 +44,22 @@ function Main() {
                             rows='1'
                             cols='30'
                             style={{ resize: 'none' }}
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
-
-                    <WorkerStatus bg='bg-neutral-600' name='John Doe' status='Available' location='JC' endTime='9PM' activity="Doing lighting training aaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaa aaaaaaa aaaaaa aaaa aaaaaaaaaaa aaaaa aaaaaaaa aaaaaaa aaaaa" />
-                    <WorkerStatus bg='bg-neutral-700' name='Noah Martineau' status='Busy' location='Dewberry Hall' endTime='7PM' activity="Setting up event" />
-                    <WorkerStatus bg='bg-neutral-600' name='Catherine Tomic' status='Busy' location='Dewberry Hall' endTime='7PM' activity="Lighting tech" />
+                    {console.log(users)}
+                    {users.map((user, index) => (
+                        console.log(index),
+                        <WorkerStatus
+                            bg={index % 2 == 0 ? 'bg-neutral-600' : 'bg-neutral-700'}
+                            name={user.first_name + ' ' + user.last_name}
+                            status={user.availability}
+                            endTime={user.end_time}
+                            activity={user.activity}
+                            location={user.location}
+                        />
+                    ))}
                 </div>
 
                 <div className='flex flex-col bg-blue-400 min-h-screen basis-1/4 border-l-2 border-black'>
