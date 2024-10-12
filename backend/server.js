@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql');
+require("dotenv").config();
+
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, '../frontend/src')));
@@ -16,12 +18,8 @@ app.use((req, res, next) => {
     next();
 });
 
-const db = mysql.createConnection({
-    host: '${{MySQL.MYSQLHOST}}',
-    user: '${{MySQL.MYSQLUSER}}',
-    password: '${{MySQL.MYSQL_ROOT_PASSWORD}}',
-    database: '${{MySQL.MYSQL_DATABASE}}'
-});
+const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`;
+const db = mysql.createConnection({ urlDB });
 
 db.connect((err) => {
     if (err) {
@@ -31,7 +29,7 @@ db.connect((err) => {
     console.log('Connected to the MySQL database');
 });
 
-app.get('/data', (req, res) => {
+app.get('/users', (req, res) => {
     const query = 'SELECT * FROM users';
     db.query(query, (err, results) => {
         if (err) {
@@ -47,7 +45,7 @@ app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });
 
-app.get('/users', (req, res) => {
+app.get('/data', (req, res) => {
     res.json([
         { name: 'Alice' },
         { name: 'Bob' }

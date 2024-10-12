@@ -10,7 +10,7 @@ function Main() {
         // Example code:
         const fetchUsers = async () => {
             try {
-                fetch('https://backend-production-bc79.up.railway.app/data')
+                fetch('https://backend-production-bc79.up.railway.app/users')
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
