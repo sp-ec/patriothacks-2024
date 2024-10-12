@@ -11,12 +11,14 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const allowedHosts = ['patriothacks-2024-production.up.railway.app', 'localhost:3000'];
     const host = req.headers.host;
+    /*
     if (allowedHosts.includes(host)) {
         next();
     } else {
         console.log('Invalid Host');
         res.status(403).send('Invalid Host: ' + host);
     }
+        */
 });
 
 app.listen(5000, () => {
