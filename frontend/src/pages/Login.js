@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
+import cityscapeImage from '../images/cityscape.png';
 
 export class Login extends Component {
     render() {
+        const backgroundStyle = {
+            backgroundImage: 'url(${cityscapeImage})',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+        };
         return (
-            <section >
-                <div className="max-w-md mx-auto bg-black rounded-bl-3xl rounded-tr-3xl border border-white p-6 space-y-4 md:space-y-6 sm:p-8 mt-64 shadow-lg shadow-white">
+            <section style={backgroundStyle}>
+                <div className="max-w-md mx-auto bg-neutral-800 rounded-bl-3xl rounded-tr-3xl border border-white p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-white">
                     <h1 className="text-xl font-bold text-white md:text-6xl text-center">Login</h1>
                     <form className="space-y-4 md:space-y-2 text-center">
                         <div className="mt-12">
