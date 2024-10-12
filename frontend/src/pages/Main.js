@@ -3,8 +3,6 @@ import Header from '../components/Header'
 import Task from '../components/Task'
 import WorkerStatus from '../components/WorkerStatus'
 
-import { motion } from "framer-motion"
-
 function Main() {
 
     const [users, setUsers] = useState([]);
@@ -27,7 +25,7 @@ function Main() {
             }
         };
 
-        fetchUsers();
+        fetchUsers([search]);
     }, []);
 
     return (
@@ -48,10 +46,9 @@ function Main() {
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
-                    {console.log(users)}
                     {users.map((user, index) => (
-                        console.log(index),
                         <WorkerStatus
+                            key={user.id}
                             bg={index % 2 == 0 ? 'bg-neutral-600' : 'bg-neutral-700'}
                             name={user.first_name + ' ' + user.last_name}
                             status={user.availability}

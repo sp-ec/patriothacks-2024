@@ -40,9 +40,8 @@ db.connect((err) => {
 });
 
 app.get('/users', (req, res) => {
-    const query = 'SELECT * FROM users WHERE full_name LIKE ?';
-    const searchString = `%${req.query.name}%`;
-    db.query(query, [searchString], (err, results) => {
+    const query = 'SELECT * FROM users WHERE full_name LIKE ? ' + req.query.name;
+    db.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
             res.status(500).send('Server error');
