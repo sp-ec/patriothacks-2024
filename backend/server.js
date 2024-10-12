@@ -18,7 +18,8 @@ app.use((req, res, next) => {
     next();
 });
 
-const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`;
+//const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`;
+const urlDB = 'mysql://root:KqEmgkHonzZqmetZVAENjyBaauWjuTuA@mysql.railway.internal:3306/railway';
 const db = mysql.createConnection({ urlDB });
 
 db.connect((err) => {
