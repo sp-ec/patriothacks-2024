@@ -40,7 +40,12 @@ db.connect((err) => {
 });
 
 app.get('/users', (req, res) => {
-    const query = 'SELECT * FROM users WHERE full_name LIKE ? ' + req.query.name;
+    if (!req.query.name) {
+        query = 'SELECT * FROM users';
+    } else {
+        query = 'SELECT * FROM users WHERE full_name LIKE ? ' + req.query.name;
+    }
+
     db.query(query, (err, results) => {
         if (err) {
             console.error('Error executing query:', err);
