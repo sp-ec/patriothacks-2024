@@ -61,11 +61,11 @@ body {
   }
   60% {
     transform: translate(-2px, 2px);
-    opacity: 0.4;
+    opacity: 0.7;
   }
   80% {
     transform: translate(2px, -2px);
-    opacity: 0.2;
+    opacity: 0.4;
   }
   100% {
     transform: translate(0);
@@ -78,9 +78,9 @@ body {
     color: white;
     font-weight: bold;
     text-shadow:
-      -1px -1px 0 #ff00ff,
-      1px -1px 0 #00ffff,
-      -1px 1px 0 #ffff00,
-      1px 1px 0 #ff00ff;
+      -1px -1px 0 #A200FF,
+      1px -1px 0 #00BFFF,
+      -1px 1px 0 #39FF14,
+      1px 1px 0 #FF00FF;
     animation: glitch 1s infinite linear alternate;
   }
