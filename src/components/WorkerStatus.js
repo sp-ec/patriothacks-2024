@@ -10,7 +10,10 @@ const WorkerStatus = (props) => {
                     <div className='flex flex-col mt-2'>
                         <h1 className='text-white text-2xl'>{props.name}</h1>
                         <div className='flex flex-row'>
-                            <div className='w-3 h-3 bg-green-500 rounded-full mt-1.5'></div>
+                            <div className={`w-3 h-3 rounded-full mt-1.5 ${props.status === 'Available' ? 'bg-green-500' : 
+                                props.status === 'Busy' ? 'bg-yellow-500' : 
+                                props.status === 'Unavailable' ? 'bg-red-500' : 'bg-gray-500'}`}>
+                            </div>
                             <p className='text-white ml-3'>{props.status}</p>
                         </div>
                     </div>
