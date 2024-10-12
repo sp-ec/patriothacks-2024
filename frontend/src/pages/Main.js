@@ -61,7 +61,7 @@ function Main() {
                     ))}
                 </div>
 
-                <div className='flex flex-col bg-blue-400 min-h-screen basis-1/4 border-l-2 border-black'>
+                <div className='flex flex-col bg-neonBlue min-h-screen basis-1/4 border-l-2 border-black'>
                     <h2 className='text-white text-3xl text-center p-4 mt-4'>Tasks</h2>
                     <Task name='Dewberry Setup' description='This a description for the dewberry setup' />
                     <Task name='Clean Colorbands' description='Clean the color dust off the bands from last nights event' />
