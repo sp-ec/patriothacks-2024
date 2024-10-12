@@ -55,7 +55,7 @@ function Main() {
                             name={user.first_name + ' ' + user.last_name}
                             status={user.availability}
                             endTime={user.end_time}
-                            activity={user.activity}
+                            activity={user.status}
                             location={user.location}
                         />
                     ))}
