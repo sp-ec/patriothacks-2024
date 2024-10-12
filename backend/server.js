@@ -11,6 +11,9 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     const allowedHosts = ['patriothacks-2024-production.up.railway.app', 'localhost:3000'];
     const host = req.headers.host;
+
+    next();
+
     /*
     if (allowedHosts.includes(host)) {
         next();
