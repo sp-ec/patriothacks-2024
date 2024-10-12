@@ -23,7 +23,9 @@ export class ProfileHeader extends Component {
                         <div className='flex flex-row mt-2'>
                             <div className={`w-3 h-3 rounded-full mt-1.5 ${this.state.status === 'Available' ? 'bg-green-500' : 
                                 this.state.status === 'Busy' ? 'bg-yellow-500' : 
-                                this.state.status === 'Unavailable' ? 'bg-red-500' : 'bg-gray-500'}`}>
+                                this.state.status === 'Unavailable' ? 'bg-red-500' : 
+                                this.state.status === 'Not Working' ? 'bg-black' :
+                                'bg-gray-500'}`}>
                             </div>
                             <div className="ml-3">
                             <Dropdown onStatusChange={this.handleStatusChange}/>
