@@ -75,12 +75,11 @@ body {
   
   .glitch {
     position: relative;
-    color: white;
-    font-weight: bold;
+    color: #e5e7eb;
     text-shadow:
-      -1px -1px 0 #A200FF,
-      1px -1px 0 #00BFFF,
-      -1px 1px 0 #39FF14,
-      1px 1px 0 #FF00FF;
+      -2px -2px 0 #A200FF,
+      2px -2px 0 #00BFFF,
+      -2px 2px 0 #39FF14,
+      2px 2px 0 #FF00FF;
     animation: glitch 1s infinite linear alternate;
   }

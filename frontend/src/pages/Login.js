@@ -31,7 +31,10 @@ export class Login extends Component {
                                 <input id="checkbox" type="checkbox" value="" className="appearance-none bg-gray-400 w-4 h-4 rounded-bl-sm rounded-tr-sm"></input>
                                 <label for="checkbox" type="text" className="text-sm text-neonBlue ml-3">remember me</label>
 
-                                <div className="mt-12">
+                                <div className="mt-6">
+                                    <button type="submit" className="w-3xl min-w-[200px] bg-neutral-600 text-neonBlue rounded-bl-lg rounded-tr-lg py-1 hover:bg-neonPurple">Login</button>
+                                </div>
+                                <div className="mt-6">
                                     <p className="text-sm text-neonPurple">new here?</p>
                                     <a className="text-sm text-neonPurple hover:underline" href='#'>create an account</a>
                                 </div>
