@@ -4,7 +4,7 @@ import ProfileHeader from './ProfileHeader'
 export class Header extends Component {
     render() {
         return (
-            <div className='bg-neutral-800 h-32 flex items-center absolute w-full'>
+            <div className='bg-neutral-800 h-32 flex items-center absolute w-full shadow-lg'>
 
                 <div className='flex flex-col ml-8'>
                     <ProfileHeader />
