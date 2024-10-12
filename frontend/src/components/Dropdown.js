@@ -13,7 +13,7 @@ const Dropdown = ({onStatusChange}) => {
             <select
                 value={selectedOption}
                 onChange={(e) => handleSelect(e.target.value)}
-                className='bg-neutral-700 rounded'
+                className='bg-neutral-700 rounded-bl-lg rounded-tr-lg'
             >
                 <option value="Available">Available</option>
                 <option value="Busy">Busy</option>

@@ -34,7 +34,7 @@ function Main() {
                     <div className='flex flex-row mt-4 ml-4 mb-4'>
                         <h2 className='text-white text-3xl p-4'>Your Co-Workers</h2>
                         <textarea
-                            className='bg-neutral-600 text-white p-2 h-10 mt-4 ml-5'
+                            className='bg-neutral-600 text-white p-2 h-10 mt-4 ml-5 rounded-bl-2xl rounded-tr-2xl'
                             placeholder='Search'
                             rows='1'
                             cols='30'
