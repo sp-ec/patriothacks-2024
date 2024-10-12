@@ -8,18 +8,21 @@ function Main() {
     useEffect(() => {
         // Fetch comments from the database and update the state
         // Example code:
-        const fetchComments = async () => {
+        const fetchUsers = async () => {
             try {
-                const response = await fetch('backend-production-bc79.up.railway.app/users');
-                const data = await response.json();
-                console.log('Users:', data);
+                fetch('http://backend-production-bc79.up.railway.app/users')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    })
 
             } catch (error) {
                 console.error('Error fetching users:', error);
+
             }
         };
 
-        fetchComments();
+        fetchUsers();
     }, []);
 
     return (
