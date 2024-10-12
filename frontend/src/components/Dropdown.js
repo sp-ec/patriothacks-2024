@@ -18,7 +18,7 @@ const Dropdown = ({ onStatusChange }) => {
                 <option value="Available">Available</option>
                 <option value="Busy">Busy</option>
                 <option value="Unavailable">Unavailable</option>
-
+                <option value="Not Working">Not Working</option>
             </select>
         </div >
     );
