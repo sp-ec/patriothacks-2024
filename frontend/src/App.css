@@ -6,6 +6,8 @@
 
 :root {
   background: #404040;
+  --neonPurple: '#A200FF';
+  --neonBlue: '#00BFFF';
 }
 
 body {
