@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 export class Main extends Component {
     render() {
         return (
-            <div>
-                <h1 className='text-green-600 bg-black'>Main</h1>
+            <div className='bg-neutral-800 h-24'>
+
             </div>
         )
     }
