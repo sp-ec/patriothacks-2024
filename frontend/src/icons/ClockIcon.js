@@ -9,8 +9,14 @@ function ClockIcon() {
             fill="none"
             viewBox="0 0 24 24"
         >
+            <defs>
+                <linearGradient id="gradient2" gradientTransform="rotate(25)">
+                    <stop offset="0%" stopColor="#7dd3fc" />
+                    <stop offset="100%" stopColor="#f0abfc" />
+                </linearGradient>
+            </defs>
             <path
-                stroke="#ffffff"
+                stroke="url(#gradient2)"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
