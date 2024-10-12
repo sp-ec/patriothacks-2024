@@ -11,7 +11,7 @@ export class Header extends Component {
                 </div>
                 <div className='flex flex-col ml-8'>
                     <textarea
-                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl'
+                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl border-2 border-blue-400'
                         placeholder='Location'
                         rows='1'
                         cols='30'
@@ -20,7 +20,7 @@ export class Header extends Component {
                 </div>
                 <div className='flex flex-col ml-8'>
                     <textarea
-                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl'
+                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl border-2 border-blue-400'
                         placeholder='Activity'
                         rows='1'
                         cols='50'
@@ -29,7 +29,7 @@ export class Header extends Component {
                 </div>
                 <div className='flex flex-col ml-8'>
                     <textarea
-                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl'
+                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl border-2 border-blue-400'
                         placeholder='End Time'
                         rows='1'
                         cols='10'
