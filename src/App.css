@@ -5,3 +5,21 @@
 :root {
   background: #313131;
 }
+
+@font-face {
+  font-family: 'Dystopian';
+  src: url('/src/fonts/dystopian.otf');
+}
+
+@font-face {
+  font-family: 'Ryzes';
+  src: url('/src/fonts/ryzes.ttf');
+}
+
+.font-dystopian {
+  font-family: 'Dystopian';
+}
+
+.font-ryzes {
+  font-family: 'Ryzes';
+}
