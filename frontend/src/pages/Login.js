@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import cityscapeImage from '../images/sky.webp';
+import '../App.css';
 
 export class Login extends Component {
     render() {
@@ -12,18 +13,19 @@ export class Login extends Component {
             alignItems: 'center',
             justifyContent: 'center'
         };
+
         return (
             <section style={backgroundStyle}>
-                <div className="max-w-md mx-auto bg-neutral-800 rounded-bl-3xl rounded-tr-3xl border border-white p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-white">
-                    <h1 className="text-xl font-bold text-white md:text-6xl text-center">Login</h1>
+                <div className="max-w-md min-w-[350px] mx-auto bg-neutral-800 rounded-bl-3xl rounded-tr-3xl border border-white p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-white">
+                    <h1 className="glitch text-xl font-bold text-white md:text-6xl text-center">Login</h1>
                     <form className="space-y-4 md:space-y-2 text-center">
                         <div className="mt-12">
                             <label for="username" className="block text-xl text-neonPurple">name</label>
-                            <input id="username" class="bg-gray-400 rounded-bl-lg rounded-tr-lg"></input>
+                            <input id="username" className="bg-gray-400 rounded-bl-lg rounded-tr-lg"></input>
                         </div>
                         <div>
                             <label for="password" type="password" className="block text-xl text-neonPurple">password</label>
-                            <input id="password" class="bg-gray-400 rounded-bl-lg rounded-tr-lg"></input>
+                            <input id="password" className="bg-gray-400 rounded-bl-lg rounded-tr-lg"></input>
 
                             <div className="mt-3 flex-row">
                                 <input id="checkbox" type="checkbox" value="" className="appearance-none bg-gray-400 w-4 h-4 rounded-bl-sm rounded-tr-sm"></input>

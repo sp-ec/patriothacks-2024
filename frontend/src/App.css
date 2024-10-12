@@ -45,3 +45,42 @@ body {
 .font-roboto-mono {
   font-family: 'Roboto Mono', monospace;
 }
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(-2px, 2px);
+    opacity: 0.8;
+  }
+  40% {
+    transform: translate(2px, -2px);
+    opacity: 0.6;
+  }
+  60% {
+    transform: translate(-2px, 2px);
+    opacity: 0.4;
+  }
+  80% {
+    transform: translate(2px, -2px);
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+  
+  .glitch {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    text-shadow:
+      -1px -1px 0 #ff00ff,
+      1px -1px 0 #00ffff,
+      -1px 1px 0 #ffff00,
+      1px 1px 0 #ff00ff;
+    animation: glitch 1s infinite linear alternate;
+  }
