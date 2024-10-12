@@ -21,7 +21,7 @@ export class Login extends Component {
 
                                 <div className="mt-8">
                                     <p className="text-sm text-purple-500">new here?</p>
-                                    <a className="text-sm text-purple-500 hover:underline" href=''>create an account</a>
+                                    <a className="text-sm text-purple-500 hover:underline" href='#'>create an account</a>
                                 </div>
                             </div>
                         </div>

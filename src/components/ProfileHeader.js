@@ -6,7 +6,7 @@ export class ProfileHeader extends Component {
         return (
             <>
                 <div className='flex flex-row'>
-                    <img src={require('../images/template_profile.png')} alt='template profile picture' className='h-20'></img>
+                    <img src={require('../images/template_profile.png')} alt='Template' className='h-20'></img>
                     <div className='flex flex-col mt-1'>
                         <h1 className='text-3xl text-white ml-8'>Your Name</h1>
                         <div className='flex flex-row mt-1'>

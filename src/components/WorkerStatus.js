@@ -6,7 +6,7 @@ const WorkerStatus = (props) => {
         <div className={props.bg}>
             <div className='flex flex-row p-4 m-4 rounded'>
                 <div className='flex flex-row basis-1/3'>
-                    <img src={require('../images/template_profile.png')} alt='Template profile picture' className='h-16 mr-6'></img>
+                    <img src={require('../images/template_profile.png')} alt='Template' className='h-16 mr-6'></img>
                     <div className='flex flex-col mt-2'>
                         <h1 className='text-white text-2xl'>{props.name}</h1>
                         <div className='flex flex-row'>

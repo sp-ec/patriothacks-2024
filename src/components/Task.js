@@ -1,5 +1,3 @@
-import React, { Component } from 'react'
-
 const Task = (props) => {
     return (
         <div>
