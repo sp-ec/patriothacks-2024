@@ -4,7 +4,7 @@ import ClockIcon from '../icons/ClockIcon'
 const WorkerStatus = (props) => {
     return (
         <div className={props.bg}>
-            <div className='flex flex-row p-4 m-4 rounded'>
+            <div className='flex flex-row p-4 m-4 rounded '>
                 <div className='flex flex-row basis-1/3 rounded'>
                     <img src={require('../images/template_profile.png')} alt='Template' className='h-16 mr-6'></img>
                     <div className='flex flex-col mt-2'>

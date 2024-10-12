@@ -20,10 +20,6 @@ app.use((req, res, next) => {
 
 //const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`;
 
-console.log(process.env.MYSQLHOST);
-console.log(process.env.MYSQLUSER);
-console.log(process.env.MYSQL_ROOT_PASSWORD);
-console.log(process.env.MYSQL_DATABASE);
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
