@@ -50,7 +50,7 @@ function Main() {
                     </div>
                     {users.map((user, index) => (
                         <WorkerStatus
-                            key={user.id}
+                            key={index}
                             bg={index % 2 == 0 ? 'bg-neutral-600' : 'bg-neutral-700'}
                             name={user.first_name + ' ' + user.last_name}
                             status={user.availability}

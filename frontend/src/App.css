@@ -51,35 +51,44 @@ body {
     transform: translate(0);
     opacity: 1;
   }
+
   20% {
     transform: translate(-2px, 2px);
     opacity: 0.8;
   }
+
   40% {
     transform: translate(2px, -2px);
     opacity: 0.6;
   }
+
   60% {
     transform: translate(-2px, 2px);
     opacity: 0.7;
   }
+
   80% {
     transform: translate(2px, -2px);
     opacity: 0.4;
   }
+
   100% {
     transform: translate(0);
     opacity: 1;
   }
 }
-  
-  .glitch {
-    position: relative;
-    color: #e5e7eb;
-    text-shadow:
-      -2px -2px 0 #A200FF,
-      2px -2px 0 #00BFFF,
-      -2px 2px 0 #39FF14,
-      2px 2px 0 #FF00FF;
-    animation: glitch 1s infinite linear alternate;
-  }
+
+.glitch {
+  position: relative;
+  color: #e5e7eb;
+  text-shadow:
+    -2px -2px 0 #A200FF,
+    2px -2px 0 #00BFFF,
+    -2px 2px 0 #39FF14,
+    2px 2px 0 #FF00FF;
+  animation: glitch 1s infinite linear alternate;
+}
+
+.search-box-shadow {
+  box-shadow: 20px 0px 0px 0px #00BFFF, 40px -px 0px 0px #FF00FF;
+}
