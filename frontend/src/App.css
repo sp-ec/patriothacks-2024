@@ -6,8 +6,10 @@
 
 :root {
   background: #404040;
-  --neonPurple: '#A200FF';
-  --neonBlue: '#00BFFF';
+  --neonGreen: #39FF14;
+  --neonBlue: #00BFFF;
+  --neonPurple: #A200FF;
+  --neonPink: #FF00FF;
 }
 
 body {
@@ -73,13 +75,18 @@ body {
   }
 }
   
-  .glitch {
-    position: relative;
-    color: #e5e7eb;
-    text-shadow:
-      -2px -2px 0 #A200FF,
-      2px -2px 0 #00BFFF,
-      -2px 2px 0 #39FF14,
-      2px 2px 0 #FF00FF;
-    animation: glitch 1s infinite linear alternate;
-  }
+.glitch {
+  position: relative;
+  color: #e5e7eb;
+  font-weight: bold;
+  text-shadow:
+    -2px -2px 0 #A200FF,
+    2px -2px 0 #00BFFF,
+    -2px 2px 0 #39FF14,
+    2px 2px 0 #FF00FF;
+  animation: glitch 1s infinite linear alternate;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #00BFFF;
+}
