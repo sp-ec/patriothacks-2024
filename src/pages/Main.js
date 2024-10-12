@@ -11,10 +11,10 @@ export class Main extends Component {
                 <div className='flex flex-row min-h-screen pt-32'>
 
                     <div className='flex flex-col basis-3/4'>
-                        <div className='flex flex-row mt-4 ml-4'>
+                        <div className='flex flex-row mt-4 ml-4 mb-4'>
                             <h2 className='text-white text-3xl p-4'>Your Co-Workers</h2>
                             <textarea
-                                className='bg-neutral-700 text-white p-2 h-10 mt-4 ml-5'
+                                className='bg-neutral-600 text-white p-2 h-10 mt-4 ml-5'
                                 placeholder='Search'
                                 rows='1'
                                 cols='30'
@@ -22,8 +22,9 @@ export class Main extends Component {
                             />
                         </div>
 
-                        <WorkerStatus name='John Doe' status='Available' location='JC' endTime='9PM' activity="Doing lighting training aaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaa aaaaaaa aaaaaa aaaa aaaaaaaaaaa aaaaa aaaaaaaa aaaaaaa aaaaa" />
-                        <WorkerStatus name='Noah Martineau' status='Busy' location='Dewberry Hall' endTime='7PM' activity="Setting up event" />
+                        <WorkerStatus bg='bg-neutral-600' name='John Doe' status='Available' location='JC' endTime='9PM' activity="Doing lighting training aaaaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaa aaaaaaaaa aaaaaaa aaaaaa aaaa aaaaaaaaaaa aaaaa aaaaaaaa aaaaaaa aaaaa" />
+                        <WorkerStatus bg='bg-neutral-700' name='Noah Martineau' status='Busy' location='Dewberry Hall' endTime='7PM' activity="Setting up event" />
+                        <WorkerStatus bg='bg-neutral-600' name='Catherine Tomic' status='Busy' location='Dewberry Hall' endTime='7PM' activity="Lighting tech" />
                     </div>
 
                     <div className='flex flex-col bg-blue-400 min-h-screen basis-1/4'>
