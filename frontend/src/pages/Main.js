@@ -3,6 +3,8 @@ import Header from '../components/Header'
 import Task from '../components/Task'
 import WorkerStatus from '../components/WorkerStatus'
 
+import { motion } from "framer-motion"
+
 function Main() {
 
     useEffect(() => {
