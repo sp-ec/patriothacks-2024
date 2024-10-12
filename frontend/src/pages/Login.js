@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import cityscapeImage from '../images/cityscape.png';
+import cityscapeImage from '../images/sky.webp';
 
 export class Login extends Component {
     render() {
         const backgroundStyle = {
-            backgroundImage: 'url(${cityscapeImage})',
+            backgroundImage: `url(${cityscapeImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: '100vh',
