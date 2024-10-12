@@ -43,7 +43,7 @@ app.get('/users', (req, res) => {
     if (!req.query.name) {
         query = 'SELECT * FROM users';
     } else {
-        query = 'SELECT * FROM users WHERE full_name LIKE ? ' + req.query.name;
+        query = `SELECT * FROM users WHERE first_name LIKE '%${req.query.name}%' OR last_name LIKE '%${req.query.name}%'`;
     }
 
     db.query(query, (err, results) => {
