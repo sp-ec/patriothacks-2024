@@ -7,20 +7,22 @@ import Landing from './pages/Landing';
 import AdminDashboard from './pages/AdminDashboard';  // Add this
 import EmployeeDashboard from './pages/EmployeeDashboard';  // Add this
 import EventManagerDashboard from './pages/EventManagerDashboard'; // Add this
+import Main from './pages/Main';
 
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Admin Route */}
-                <Route path="/employee-dashboard" element={<EmployeeDashboard />} /> {/* Employee Route */}
-                <Route path="/event-manager-dashboard" element={<EventManagerDashboard />} /> {/* Event Manager Route */}
-            </Routes>
-        </Router>
-    );
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} /> {/* Admin Route */}
+        <Route path="/employee-dashboard" element={<EmployeeDashboard />} /> {/* Employee Route */}
+        <Route path="/event-manager-dashboard" element={<EventManagerDashboard />} /> {/* Event Manager Route */}
+        <Route path="/main" element={<Main />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

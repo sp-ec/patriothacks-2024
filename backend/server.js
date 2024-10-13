@@ -4,8 +4,8 @@ const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql2');
 const authRoutes = require('./routes/auth');
-const taskRoutes = require('./routes/tasks'); 
-const teamRoutes = require('./routes/teams'); 
+const taskRoutes = require('./routes/tasks');
+const teamRoutes = require('./routes/teams');
 require("dotenv").config();
 
 
@@ -28,7 +28,24 @@ const db = mysql.createConnection({
     password: process.env.MYSQL_ROOT_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     port: process.env.MYSQLPORT,
-    connectTimeout: 10000 
+    connectTimeout: 10000
+});
+
+app.get('/users', (req, res) => {
+    if (!req.query.name) {
+        query = 'SELECT * FROM users';
+    } else {
+        query = `SELECT * FROM users WHERE full_name LIKE '%${req.query.name}%'`;
+    }
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Error executing query:', err);
+            res.status(500).send('Server error');
+            return;
+        }
+        res.json(results);
+    });
 });
 
 db.connect((err) => {
@@ -39,8 +56,8 @@ db.connect((err) => {
     console.log('Connected to the MySQL database');
 
     app.use('/api', authRoutes(db));
-    app.use('/api/tasks', taskRoutes(db)); 
-    app.use('/api/teams', teamRoutes(db));  
+    app.use('/api/tasks', taskRoutes(db));
+    app.use('/api/teams', teamRoutes(db));
 
     app.listen(5000, () => {
         console.log('Server is running on port 5000');
