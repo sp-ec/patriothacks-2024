@@ -2,7 +2,6 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
-<<<<<<< HEAD
 import Register from './pages/Register';
 import Landing from './pages/Landing';
 import AdminDashboard from './pages/AdminDashboard';  // Add this
@@ -22,21 +21,6 @@ function App() {
             </Routes>
         </Router>
     );
-=======
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Register from './pages/Register';
-
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route exact path="/" element={<Main />} />  {/* The login page */}
-        <Route path="/register" element={<Register />} />  {/* The register  page */}
-      </Routes>
-    </Router>
-  );
->>>>>>> 842f75f57744d5c91d406a19156047c94a84b178
 }
 
 export default App;
