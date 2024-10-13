@@ -3,23 +3,24 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 const mysql = require('mysql2');
-const authRoutes = require('./routes/auth'); 
+const authRoutes = require('./routes/auth');
+const taskRoutes = require('./routes/tasks'); 
+const teamRoutes = require('./routes/teams'); 
 require("dotenv").config();
 
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../frontend/src')));
+app.use(express.json());
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*"); // Allow any origin
+    res.header("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
     );
     next();
 });
-
-//const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`;
 
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST,
@@ -36,38 +37,14 @@ db.connect((err) => {
         return;
     }
     console.log('Connected to the MySQL database');
-});
 
-app.use('/api', authRoutes(db));
+    app.use('/api', authRoutes(db));
+    app.use('/api/tasks', taskRoutes(db)); 
+    app.use('/api/teams', teamRoutes(db));  
 
-app.use(express.static(path.join(__dirname, '../frontend/src')));
-
-app.get('/users', (req, res) => {
-    let query;
-    if (!req.query.name) {
-        query = 'SELECT * FROM users';
-    } else {
-        query = `SELECT * FROM users WHERE full_name LIKE '%${req.query.name}%'`;
-    }
-
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error('Error executing query:', err);
-            res.status(500).send('Server error');
-            return;
-        }
-        res.json(results);
+    app.listen(5000, () => {
+        console.log('Server is running on port 5000');
     });
 });
 
-app.get('/data', (req, res) => {
-    res.json([
-        { name: 'Alice' },
-        { name: 'Bob' }
-    ]);
-});
-
-
-app.listen(5000, () => {
-    console.log('Server is running on port 5000');
-});
+app.use(express.static(path.join(__dirname, '../frontend/src')));
