@@ -51,6 +51,7 @@ const Register = () => {
             }
         } catch (error) {
             setError('An error occurred during registration');
+            console.log(error);
             setSuccess('');
         }
     };
