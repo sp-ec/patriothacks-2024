@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Login />} />  {/* The login page */}
-        <Route path="/register" element={<Register />} />  {/* The register page */}
+        <Route path="/register" element={<Register />} />  {/* The register  page */}
       </Routes>
     </Router>
   );
