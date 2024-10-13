@@ -396,7 +396,7 @@ const Login = () => {
     return (
         <section style={backgroundStyle}>
             <div className="max-w-md mx-auto bg-neutral-800 rounded-bl-3xl rounded-tr-3xl border border-white p-6 space-y-4 md:space-y-6 sm:p-8 shadow-lg shadow-white">
-                <h1 className="text-xl font-bold text-white md:text-6xl text-center">Login</h1>
+                <h1 className="glitch font-bold text-white md:text-6xl text-center">Login</h1>
                 <form className="space-y-4 md:space-y-2 text-center" onSubmit={handleLogin}>
                     <div className="mt-12">
                         <label htmlFor="username" className="block text-xl text-neonPurple">Username</label>
