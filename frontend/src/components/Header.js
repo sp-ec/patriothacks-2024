@@ -11,7 +11,7 @@ export class Header extends Component {
                 </div>
                 <div className='flex flex-col ml-8'>
                     <textarea
-                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl outline outline-1 outline-neonBlue outline-offset-4 transition-all duration-250 ease-in-out'
+                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl outline outline-1 outline-neonBlue outline-offset-4 transition-all duration-250 ease-in-out hover:outline-offset-8'
                         placeholder='Location'
                         rows='1'
                         cols='30'
@@ -22,7 +22,7 @@ export class Header extends Component {
                 </div>
                 <div className='flex flex-col ml-8'>
                     <textarea
-                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl outline outline-1 outline-neonBlue outline-offset-4 transition-all duration-250 ease-in-out'
+                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl outline outline-1 outline-neonBlue outline-offset-4 transition-all duration-250 ease-in-out hover:outline-offset-8'
                         placeholder='Activity'
                         rows='1'
                         cols='50'
@@ -33,7 +33,7 @@ export class Header extends Component {
                 </div>
                 <div className='flex flex-col ml-8'>
                     <textarea
-                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl outline outline-1 outline-neonBlue outline-offset-4 transition-all duration-250 ease-in-out'
+                        className='bg-neutral-700 text-white p-2 rounded-bl-2xl rounded-tr-2xl outline outline-1 outline-neonBlue outline-offset-4 transition-all duration-250 ease-in-out hover:outline-offset-8'
                         placeholder='End Time'
                         rows='1'
                         cols='10'
