@@ -12,16 +12,16 @@ const WorkerStatus = (props) => {
                         <div className='flex flex-row'>
                             <div className={`w-3 h-3 rounded-full mt-1.5 ${props.status === 'Available' ? 'bg-green-500' :
                                 props.status === 'Busy' ? 'bg-yellow-500' :
-                                props.status === 'Unavailable' ? 'bg-red-500' :
-                                props.status === 'Not Working' ? 'bg-black' :
-                                'bg-gray-500'}`}>
+                                    props.status === 'Unavailable' ? 'bg-red-500' :
+                                        props.status === 'Not Working' ? 'bg-neutral-700' :
+                                            'bg-gray-500'}`}>
                             </div>
                             <p className='text-white ml-3'>{props.status}</p>
                         </div>
                     </div>
                 </div>
 
-                <div className='flex flex-col justify-start basis-1/5'>
+                <div className={`flex flex-col justify-start basis-1/5 ${props.status === 'Not Working' ? 'invisible' : 'visible'}`}>
                     <div className='flex flex-row mt-2'>
                         <LocationIcon />
                         <p className='text-white ml-3 line-clamp-1'>{props.location}</p>
