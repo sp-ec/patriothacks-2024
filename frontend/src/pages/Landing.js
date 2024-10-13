@@ -17,7 +17,7 @@ const LandingPage = () => {
             {/* Navbar */}
             <nav className="bg-neutral-900 text-white p-6 fixed w-full top-0 z-50 shadow-lg">
                 <div className="container mx-auto flex justify-between items-center">
-                    <div className="text-4xl font-extrabold glow-text">Coordin8</div>
+                    <div className="text-4xl font-extrabold glow-text">Status Now</div>
                     <ul className="flex space-x-8 text-lg">
                         <li><a href="#home" className="hover:text-neonPurple">Home</a></li>
                         <li><a href="#features" className="hover:text-neonPurple">Features</a></li>
@@ -35,7 +35,7 @@ const LandingPage = () => {
             <section id="home" className="relative h-screen bg-cover bg-center text-white" style={{ backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/08/10/03/47/people-2613263_960_720.jpg)' }}>
                 <div className="absolute inset-0 bg-black bg-opacity-60"></div>
                 <div className="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4">
-                    <h1 className="text-5xl md:text-7xl font-extrabold mb-6 slide-in hidden">Coordin8</h1>
+                    <h1 className="text-5xl md:text-7xl font-extrabold mb-6 slide-in hidden">Status Now</h1>
                     <p className="text-2xl md:text-3xl mb-8 slide-in hidden">Making Event Planning Effortless</p>
                     <a href="/register" className="glow-button hover:bg-neonPurple py-3 px-6 rounded-lg text-xl font-bold transition-all">Get Started</a>
                 </div>
@@ -44,7 +44,7 @@ const LandingPage = () => {
             {/* Features Section */}
             <section id="features" className="py-24 bg-neutral-100">
                 <div className="container mx-auto text-center">
-                    <h2 className="text-4xl font-bold mb-12 slide-in hidden">Why Coordin8?</h2>
+                    <h2 className="text-4xl font-bold mb-12 slide-in hidden">Why Status Now?</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         <div className="bg-neutral-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow glow-box">
                             <img src="https://cdn.pixabay.com/photo/2016/11/29/09/32/event-1867329_960_720.jpg" alt="Streamlined Events" className="rounded-md w-full mb-6" />
@@ -68,9 +68,9 @@ const LandingPage = () => {
             {/* About Us Section */}
             <section id="about" className="bg-neutral-900 text-white py-24">
                 <div className="container mx-auto text-center">
-                    <h2 className="text-4xl font-bold mb-12 slide-in hidden">About Coordin8</h2>
+                    <h2 className="text-4xl font-bold mb-12 slide-in hidden">About Status Now</h2>
                     <p className="max-w-4xl mx-auto text-xl">
-                        Coordin8 is the ultimate event management platform, created to make event planning easy, collaborative, and efficient. 
+                        Status Now is the ultimate event management platform, created to make event planning easy, collaborative, and efficient.
                         Whether you're hosting a small gathering or a large corporate event, our platform empowers you to handle every detail.
                     </p>
                 </div>
@@ -81,14 +81,14 @@ const LandingPage = () => {
                 <div className="container mx-auto text-center">
                     <h2 className="text-4xl font-bold mb-12 slide-in hidden">Contact Us</h2>
                     <p className="max-w-4xl mx-auto text-xl mb-6">We'd love to hear from you! Whether you're curious about features, pricing, or anything else, our team is here to help.</p>
-                    <a href="mailto:contact@coordin8.com" className="glow-button hover:bg-neonPurple py-3 px-8 rounded-lg text-lg transition-all">Get In Touch</a>
+                    <a href="mailto:contact@StatusNow.com" className="glow-button hover:bg-neonPurple py-3 px-8 rounded-lg text-lg transition-all">Get In Touch</a>
                 </div>
             </section>
 
             {/* Footer */}
             <footer className="bg-neutral-900 text-white py-8">
                 <div className="container mx-auto flex justify-between items-center">
-                    <p>&copy; 2024 Coordin8. All rights reserved.</p>
+                    <p>&copy; 2024 Status Now. All rights reserved.</p>
                     <div className="flex space-x-4">
                         <a href="https://facebook.com" className="hover:text-neonPurple">Facebook</a>
                         <a href="https://twitter.com" className="hover:text-neonPurple">Twitter</a>
