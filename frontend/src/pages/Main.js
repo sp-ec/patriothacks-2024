@@ -65,6 +65,9 @@ function Main() {
                     <h2 className='text-white text-3xl text-center p-4 mt-4'>Tasks</h2>
                     <Task name='Dewberry Setup' description='This a description for the dewberry setup' />
                     <Task name='Clean Colorbands' description='Clean the color dust off the bands from last nights event' />
+                    <Task name='Find Drape' description='Find 20 pieces of drape, set inside of an empty trunk, and label'></Task>
+                    <Task name='Pull for Setup' description='Pull equipment for Event A and leave a note with equipment pulled'></Task>
+                    <Task name='Organize Void' description='Clear all trunks and put everything away'></Task>
                 </div>
 
             </div>
