@@ -21,10 +21,6 @@ app.use((req, res, next) => {
 
 //const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQL_ROOT_PASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQL_DATABASE}`;
 
-console.log(process.env.MYSQLHOST);
-console.log(process.env.MYSQLUSER);
-console.log(process.env.MYSQL_ROOT_PASSWORD);
-console.log(process.env.MYSQL_DATABASE);
 const db = mysql.createConnection({
     host: process.env.MYSQLHOST,
     user: process.env.MYSQLUSER,
@@ -51,7 +47,7 @@ app.get('/users', (req, res) => {
     if (!req.query.name) {
         query = 'SELECT * FROM users';
     } else {
-        query = `SELECT * FROM users WHERE first_name LIKE '%${req.query.name}%' OR last_name LIKE '%${req.query.name}%'`;
+        query = `SELECT * FROM users WHERE full_name LIKE '%${req.query.name}%'`;
     }
 
     db.query(query, (err, results) => {

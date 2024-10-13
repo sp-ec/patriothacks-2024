@@ -50,18 +50,18 @@ function Main() {
                     </div>
                     {users.map((user, index) => (
                         <WorkerStatus
-                            key={user.id}
+                            key={index}
                             bg={index % 2 == 0 ? 'bg-neutral-600' : 'bg-neutral-700'}
                             name={user.first_name + ' ' + user.last_name}
                             status={user.availability}
                             endTime={user.end_time}
-                            activity={user.activity}
+                            activity={user.status}
                             location={user.location}
                         />
                     ))}
                 </div>
 
-                <div className='flex flex-col bg-neonBlue min-h-screen basis-1/4 border-l-2 border-black'>
+                <div className='flex flex-col bg-gradient-to-r from-violet-500 to-fuchsia-500 min-h-screen basis-1/4 shadow-lg'>
                     <h2 className='text-white text-3xl text-center p-4 mt-4'>Tasks</h2>
                     <Task name='Dewberry Setup' description='This a description for the dewberry setup' />
                     <Task name='Clean Colorbands' description='Clean the color dust off the bands from last nights event' />
