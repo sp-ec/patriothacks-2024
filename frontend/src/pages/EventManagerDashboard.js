@@ -1,20 +1,221 @@
+// import React, { useState, useEffect } from 'react';
+
+// const EventManagerDashboard = () => {
+//     const [employees, setEmployees] = useState([]);
+//     const [tasks, setTasks] = useState([]); // For storing tasks
+//     const [selectedEmployee, setSelectedEmployee] = useState('');
+//     const [taskName, setTaskName] = useState('');
+//     const [taskDescription, setTaskDescription] = useState('');
+//     const [taskLocation, setTaskLocation] = useState(''); // Track task location
+//     const [error, setError] = useState('');
+//     const [success, setSuccess] = useState('');
+
+//     useEffect(() => {
+//         fetchEmployees();
+//         fetchTasks(); // Fetch tasks on component mount
+//     }, []);
+
+//     // Fetch all employees
+//     const fetchEmployees = async () => {
+//         try {
+//             const response = await fetch('http://localhost:5000/api/teams/employees', {
+//                 headers: {
+//                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+//                 },
+//             });
+//             const data = await response.json();
+//             if (response.ok) {
+//                 setEmployees(data);
+//             } else {
+//                 setError('Error fetching employees');
+//             }
+//         } catch (error) {
+//             setError('Error fetching employees');
+//         }
+//     };
+
+//     // Fetch all tasks
+//     const fetchTasks = async () => {
+//         try {
+//             const response = await fetch('http://localhost:5000/api/tasks', {
+//                 headers: {
+//                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+//                 },
+//             });
+//             const data = await response.json();
+//             if (response.ok) {
+//                 setTasks(data); // Store tasks in state
+//             } else {
+//                 setError('Error fetching tasks');
+//             }
+//         } catch (error) {
+//             setError('Error fetching tasks');
+//         }
+//     };
+
+//     const handleAssignTask = async (e) => {
+//         e.preventDefault();
+
+//         const assignedUserId = selectedEmployee === 'unassigned' ? null : selectedEmployee; // Handle unassigned
+
+//         try {
+//             const response = await fetch('http://localhost:5000/api/tasks/assign-task', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+//                 },
+//                 body: JSON.stringify({
+//                     employeeId: assignedUserId,
+//                     taskName,
+//                     taskDescription,
+//                     taskLocation, // Send location data
+//                 }),
+//             });
+
+//             const data = await response.json();
+
+//             if (response.ok) {
+//                 setSuccess(data.message);
+//                 setError('');
+//                 fetchTasks(); // Fetch updated tasks after assignment
+//             } else {
+//                 setError(data.error);
+//                 setSuccess('');
+//             }
+//         } catch (error) {
+//             setError('An error occurred while assigning the task');
+//         }
+//     };
+
+//     // Helper to render task bubbles by status
+//     const renderTaskBubbles = (status) => {
+//         return tasks
+//             .filter(task => task.status === status)
+//             .map(task => (
+//                 <div key={task.id} className="bg-neutral-800 text-white p-4 mb-2 rounded-lg shadow-lg">
+//                     <h4 className="text-lg font-bold">{task.task_name}</h4>
+//                     <p>{task.task_description}</p>
+//                     <p className="text-sm text-gray-400">Location: {task.location || 'No location specified'}</p>
+//                     <p className="text-sm text-gray-400">Assigned to: {task.assigned_user_id ? task.assigned_user_id : 'Unassigned'}</p>
+//                 </div>
+//             ));
+//     };
+
+//     return (
+//         <div className="min-h-screen bg-neutral-900 text-white p-10 flex">
+//             {/* Main Content */}
+//             <div className="w-3/4">
+//                 <h1 className="text-4xl mb-8">Event Manager Dashboard</h1>
+
+//                 <form onSubmit={handleAssignTask}>
+//                     <div className="mb-4">
+//                         <label htmlFor="taskName" className="block text-lg mb-2">
+//                             Task Name
+//                         </label>
+//                         <input
+//                             type="text"
+//                             id="taskName"
+//                             value={taskName}
+//                             onChange={(e) => setTaskName(e.target.value)}
+//                             className="bg-neutral-700 p-2 rounded-lg w-full"
+//                         />
+//                     </div>
+
+//                     <div className="mb-4">
+//                         <label htmlFor="taskDescription" className="block text-lg mb-2">
+//                             Task Description
+//                         </label>
+//                         <textarea
+//                             id="taskDescription"
+//                             value={taskDescription}
+//                             onChange={(e) => setTaskDescription(e.target.value)}
+//                             className="bg-neutral-700 p-2 rounded-lg w-full"
+//                         />
+//                     </div>
+
+//                     <div className="mb-4">
+//                          <label htmlFor="taskLocation" className="block text-lg mb-2">
+//                               Task Location
+//                          </label>
+//                         <input
+//                         type="text"
+//                         id="taskLocation"
+//                         value={taskLocation}
+//                         onChange={(e) => setTaskLocation(e.target.value)}
+//                         className="bg-neutral-700 p-2 rounded-lg w-full"
+//                             />
+//                         </div>
+
+//                     <div className="mb-4">
+//                         <label htmlFor="employee" className="block text-lg mb-2">
+//                             Assign to Employee
+//                         </label>
+//                         <select
+//                             id="employee"
+//                             value={selectedEmployee}
+//                             onChange={(e) => setSelectedEmployee(e.target.value)}
+//                             className="bg-neutral-700 p-2 rounded-lg w-full"
+//                         >
+//                             <option value="unassigned">Unassigned</option> {/* Unassigned option */}
+//                             {employees.map(employee => (
+//                                 <option key={employee.id} value={employee.id}>
+//                                     {employee.first_name} {employee.last_name}
+//                                 </option>
+//                             ))}
+//                         </select>
+//                     </div>
+
+//                     {error && <p className="text-red-500">{error}</p>}
+//                     {success && <p className="text-green-500">{success}</p>}
+
+//                     <button type="submit" className="bg-neonPurple p-2 rounded-lg mt-4">
+//                         Assign Task
+//                     </button>
+//                 </form>
+//             </div>
+
+//             {/* Sidebar for Tasks */}
+//             <div className="w-1/4 pl-8">
+//                 <h2 className="text-2xl font-bold mb-4">Tasks</h2>
+//                 <h3 className="text-xl font-semibold mb-2">Pending</h3>
+//                 {renderTaskBubbles('pending')}
+                
+//                 <h3 className="text-xl font-semibold mt-6 mb-2">In Progress</h3>
+//                 {renderTaskBubbles('in_progress')}
+                
+//                 <h3 className="text-xl font-semibold mt-6 mb-2">Completed</h3>
+//                 {renderTaskBubbles('completed')}
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default EventManagerDashboard;
+
+
+
 import React, { useState, useEffect } from 'react';
 
 const EventManagerDashboard = () => {
     const [employees, setEmployees] = useState([]);
+    const [tasks, setTasks] = useState([]); // For storing tasks
     const [selectedEmployee, setSelectedEmployee] = useState('');
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
+    const [taskLocation, setTaskLocation] = useState(''); // Track task location
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
         fetchEmployees();
+        fetchTasks(); // Fetch tasks on component mount
     }, []);
 
+    // Fetch all employees
     const fetchEmployees = async () => {
         try {
-            const response = await fetch('/api/employees', {
+            const response = await fetch('http://localhost:5000/api/teams/employees', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -30,20 +231,42 @@ const EventManagerDashboard = () => {
         }
     };
 
+    // Fetch all tasks
+    const fetchTasks = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/tasks', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setTasks(data); // Store tasks in state
+            } else {
+                setError('Error fetching tasks');
+            }
+        } catch (error) {
+            setError('Error fetching tasks');
+        }
+    };
+
     const handleAssignTask = async (e) => {
         e.preventDefault();
 
+        const assignedUserId = selectedEmployee === 'unassigned' ? null : selectedEmployee; // Handle unassigned
+
         try {
-            const response = await fetch('/api/assign-task', {
+            const response = await fetch('http://localhost:5000/api/tasks/assign-task', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
                 body: JSON.stringify({
-                    employeeId: selectedEmployee,
+                    employeeId: assignedUserId,
                     taskName,
                     taskDescription,
+                    taskLocation, // Send location data
                 }),
             });
 
@@ -52,6 +275,7 @@ const EventManagerDashboard = () => {
             if (response.ok) {
                 setSuccess(data.message);
                 setError('');
+                fetchTasks(); // Fetch updated tasks after assignment
             } else {
                 setError(data.error);
                 setSuccess('');
@@ -61,213 +285,109 @@ const EventManagerDashboard = () => {
         }
     };
 
+    // Helper to render task bubbles by status
+    const renderTaskBubbles = (status) => {
+        return tasks
+            .filter(task => task.status === status)
+            .map(task => (
+                <div key={task.id} className="bg-neutral-800 text-white p-4 mb-2 rounded-lg shadow-lg">
+                    <h4 className="text-lg font-bold">{task.task_name}</h4>
+                    <p>{task.task_description}</p>
+                    <p className="text-sm text-gray-400">Location: {task.location || ''}</p>
+                    <p className="text-sm text-gray-400">
+                        Assigned to: {task.first_name ? `${task.first_name} ${task.last_name}` : 'Unassigned'}
+                    </p>
+                </div>
+            ));
+    };
+
     return (
-        <div className="min-h-screen bg-neutral-900 text-white p-10">
-            <h1 className="text-4xl mb-8">Event Manager Dashboard</h1>
+        <div className="min-h-screen bg-neutral-900 text-white p-10 flex">
+            {/* Main Content */}
+            <div className="w-3/4">
+                <h1 className="text-4xl mb-8">Event Manager Dashboard</h1>
 
-            <form onSubmit={handleAssignTask}>
-                <div className="mb-4">
-                    <label htmlFor="taskName" className="block text-lg mb-2">
-                        Task Name
-                    </label>
-                    <input
+                <form onSubmit={handleAssignTask}>
+                    <div className="mb-4">
+                        <label htmlFor="taskName" className="block text-lg mb-2">
+                            Task Name
+                        </label>
+                        <input
+                            type="text"
+                            id="taskName"
+                            value={taskName}
+                            onChange={(e) => setTaskName(e.target.value)}
+                            className="bg-neutral-700 p-2 rounded-lg w-full"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="taskDescription" className="block text-lg mb-2">
+                            Task Description
+                        </label>
+                        <textarea
+                            id="taskDescription"
+                            value={taskDescription}
+                            onChange={(e) => setTaskDescription(e.target.value)}
+                            className="bg-neutral-700 p-2 rounded-lg w-full"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                         <label htmlFor="taskLocation" className="block text-lg mb-2">
+                              Task Location
+                         </label>
+                        <input
                         type="text"
-                        id="taskName"
-                        value={taskName}
-                        onChange={(e) => setTaskName(e.target.value)}
+                        id="taskLocation"
+                        value={taskLocation}
+                        onChange={(e) => setTaskLocation(e.target.value)}
                         className="bg-neutral-700 p-2 rounded-lg w-full"
-                    />
-                </div>
+                            />
+                        </div>
 
-                <div className="mb-4">
-                    <label htmlFor="taskDescription" className="block text-lg mb-2">
-                        Task Description
-                    </label>
-                    <textarea
-                        id="taskDescription"
-                        value={taskDescription}
-                        onChange={(e) => setTaskDescription(e.target.value)}
-                        className="bg-neutral-700 p-2 rounded-lg w-full"
-                    />
-                </div>
+                    <div className="mb-4">
+                        <label htmlFor="employee" className="block text-lg mb-2">
+                            Assign to Employee
+                        </label>
+                        <select
+                            id="employee"
+                            value={selectedEmployee}
+                            onChange={(e) => setSelectedEmployee(e.target.value)}
+                            className="bg-neutral-700 p-2 rounded-lg w-full"
+                        >
+                            <option value="unassigned">Unassigned</option> {/* Unassigned option */}
+                            {employees.map(employee => (
+                                <option key={employee.id} value={employee.id}>
+                                    {employee.first_name} {employee.last_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-                <div className="mb-4">
-                    <label htmlFor="employee" className="block text-lg mb-2">
-                        Assign to Employee
-                    </label>
-                    <select
-                        id="employee"
-                        value={selectedEmployee}
-                        onChange={(e) => setSelectedEmployee(e.target.value)}
-                        className="bg-neutral-700 p-2 rounded-lg w-full"
-                    >
-                        <option value="">Select an employee</option>
-                        {employees.map(employee => (
-                            <option key={employee.id} value={employee.id}>
-                                {employee.first_name} {employee.last_name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                    {error && <p className="text-red-500">{error}</p>}
+                    {success && <p className="text-green-500">{success}</p>}
 
-                {error && <p className="text-red-500">{error}</p>}
-                {success && <p className="text-green-500">{success}</p>}
+                    <button type="submit" className="bg-neonPurple p-2 rounded-lg mt-4">
+                        Assign Task
+                    </button>
+                </form>
+            </div>
 
-                <button type="submit" className="bg-neonPurple p-2 rounded-lg mt-4">
-                    Assign Task
-                </button>
-            </form>
+            {/* Sidebar for Tasks */}
+            <div className="w-1/4 pl-8">
+                <h2 className="text-2xl font-bold mb-4">Tasks</h2>
+                <h3 className="text-xl font-semibold mb-2">Pending</h3>
+                {renderTaskBubbles('pending')}
+                
+                <h3 className="text-xl font-semibold mt-6 mb-2">In Progress</h3>
+                {renderTaskBubbles('in_progress')}
+                
+                <h3 className="text-xl font-semibold mt-6 mb-2">Completed</h3>
+                {renderTaskBubbles('completed')}
+            </div>
         </div>
     );
 };
 
 export default EventManagerDashboard;
-
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-
-// const EventManagerDashboard = () => {
-//     const [tasks, setTasks] = useState([]);
-//     const [newTask, setNewTask] = useState({ taskName: '', description: '', assigned_user_id: '' });
-//     const [employees, setEmployees] = useState([]);
-//     const [success, setSuccess] = useState('');
-//     const [error, setError] = useState('');
-
-//     // Fetch employees and tasks for this company
-//     useEffect(() => {
-//         fetch('/api/event-manager/employees')
-//             .then(res => res.json())
-//             .then(data => setEmployees(data))
-//             .catch(err => setError('Error fetching employees'));
-
-//         fetch('/api/event-manager/tasks')
-//             .then(res => res.json())
-//             .then(data => setTasks(data))
-//             .catch(err => setError('Error fetching tasks'));
-//     }, []);
-
-//     const handleCreateTask = async () => {
-//         try {
-//             const response = await fetch('/api/create-task', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 body: JSON.stringify(newTask),
-//             });
-
-//             const data = await response.json();
-
-//             if (response.ok) {
-//                 setSuccess('Task created successfully!');
-//                 setError('');
-//                 setNewTask({ taskName: '', description: '', assigned_user_id: '' });
-//                 setTasks([...tasks, data.task]);
-//             } else {
-//                 setError(data.error);
-//             }
-//         } catch (error) {
-//             setError('Error creating task');
-//         }
-//     };
-
-//     return (
-//         <div className="min-h-screen bg-neutral-900 text-white p-10">
-//             <div className="flex">
-//                 {/* Side Panel for Employee List */}
-//                 <div className="w-1/4 bg-neutral-800 p-6 rounded-lg shadow-lg">
-//                     <h2 className="text-2xl mb-4 text-neonPurple">Company Employees</h2>
-//                     <ul className="space-y-4">
-//                         {employees.map(employee => (
-//                             <li key={employee.id} className="flex items-center">
-//                                 <img
-//                                     src={employee.imageUrl || '/default-avatar.png'}
-//                                     alt="Employee"
-//                                     className="w-10 h-10 rounded-full mr-4"
-//                                 />
-//                                 <div>
-//                                     <p>{employee.first_name} {employee.last_name}</p>
-//                                     <p className="text-sm text-gray-400">{employee.role}</p>
-//                                 </div>
-//                             </li>
-//                         ))}
-//                     </ul>
-//                 </div>
-
-//                 {/* Main Content for Task Creation and Task List */}
-//                 <div className="w-3/4 ml-10">
-//                     <h1 className="text-4xl mb-8">Event Manager Dashboard</h1>
-
-//                     {/* Task Creation Section */}
-//                     <div className="bg-neutral-800 p-6 rounded-lg shadow-lg mb-8">
-//                         <h2 className="text-2xl mb-4">Create New Task</h2>
-//                         <input
-//                             type="text"
-//                             placeholder="Task Name"
-//                             value={newTask.taskName}
-//                             onChange={(e) => setNewTask({ ...newTask, taskName: e.target.value })}
-//                             className="bg-neutral-700 p-2 w-full mb-4 text-white rounded"
-//                         />
-//                         <input
-//                             type="text"
-//                             placeholder="Description"
-//                             value={newTask.description}
-//                             onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-//                             className="bg-neutral-700 p-2 w-full mb-4 text-white rounded"
-//                         />
-//                         <select
-//                             value={newTask.assigned_user_id}
-//                             onChange={(e) => setNewTask({ ...newTask, assigned_user_id: e.target.value })}
-//                             className="bg-neutral-700 p-2 w-full mb-4 text-white rounded"
-//                         >
-//                             <option value="">Select Employee</option>
-//                             {employees.map(employee => (
-//                                 <option key={employee.id} value={employee.id}>
-//                                     {employee.first_name} {employee.last_name}
-//                                 </option>
-//                             ))}
-//                         </select>
-//                         <button
-//                             onClick={handleCreateTask}
-//                             className="bg-neonPurple p-2 rounded-lg hover:bg-neonPurple-dark text-white"
-//                         >
-//                             Create Task
-//                         </button>
-
-//                         {success && <p className="text-green-500 mt-4">{success}</p>}
-//                         {error && <p className="text-red-500 mt-4">{error}</p>}
-//                     </div>
-
-//                     {/* Task List Section */}
-//                     <div className="bg-neutral-800 p-6 rounded-lg shadow-lg">
-//                         <h2 className="text-2xl mb-4">Tasks for Company</h2>
-//                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-//                             {tasks.map(task => (
-//                                 <div key={task.id} className="bg-neutral-700 p-4 rounded-lg">
-//                                     <h3 className="text-xl text-neonPurple">{task.taskName}</h3>
-//                                     <p className="text-sm text-gray-400">{task.description}</p>
-//                                     <p className="text-sm text-gray-400">Assigned to: {task.assigned_user_id}</p>
-//                                     <p className="text-sm text-gray-400">Status: {task.status}</p>
-//                                 </div>
-//                             ))}
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default EventManagerDashboard;
-
-
-
-
-

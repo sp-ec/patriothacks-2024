@@ -9,8 +9,7 @@ function Main() {
     const [search, setSearch] = useState('');
 
     useEffect(() => {
-        // Fetch comments from the database and update the state
-        // Example code:
+
         console.log(search);
         console.log("Fetching users...");
         const fetchUsers = async () => {

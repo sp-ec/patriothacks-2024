@@ -2,19 +2,18 @@ import React from 'react';
 import { useEffect } from 'react';
 
 const LandingPage = () => {
-    // Add animation class after page load
     useEffect(() => {
         const elements = document.querySelectorAll('.slide-in');
         elements.forEach((element, index) => {
             setTimeout(() => {
                 element.classList.add('visible');
-            }, index * 200); // Delay for each letter
+            }, index * 200); 
         });
     }, []);
 
     return (
         <div className="font-sans text-white">
-            {/* Navbar */}
+     
             <nav className="bg-neutral-900 text-white p-6 fixed w-full top-0 z-50 shadow-lg">
                 <div className="container mx-auto flex justify-between items-center">
                     <div className="text-4xl font-extrabold glow-text">Status Now</div>
@@ -31,7 +30,6 @@ const LandingPage = () => {
                 </div>
             </nav>
 
-            {/* Hero Section */}
             <section id="home" className="relative h-screen bg-cover bg-center text-white" style={{ backgroundImage: 'url(https://cdn.pixabay.com/photo/2017/08/10/03/47/people-2613263_960_720.jpg)' }}>
                 <div className="absolute inset-0 bg-black bg-opacity-60"></div>
                 <div className="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4">
@@ -41,7 +39,6 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* Features Section */}
             <section id="features" className="py-24 bg-neutral-100">
                 <div className="container mx-auto text-center">
                     <h2 className="text-4xl font-bold mb-12 slide-in hidden">Why Status Now?</h2>
@@ -65,7 +62,6 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* About Us Section */}
             <section id="about" className="bg-neutral-900 text-white py-24">
                 <div className="container mx-auto text-center">
                     <h2 className="text-4xl font-bold mb-12 slide-in hidden">About Status Now</h2>
@@ -76,7 +72,6 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* Contact Section */}
             <section id="contact" className="py-24 bg-neutral-100">
                 <div className="container mx-auto text-center">
                     <h2 className="text-4xl font-bold mb-12 slide-in hidden">Contact Us</h2>
@@ -85,7 +80,6 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* Footer */}
             <footer className="bg-neutral-900 text-white py-8">
                 <div className="container mx-auto flex justify-between items-center">
                     <p>&copy; 2024 Status Now. All rights reserved.</p>

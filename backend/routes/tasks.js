@@ -5,118 +5,122 @@ require('dotenv').config();
 const router = express.Router();
 
 module.exports = (db) => {
-
     const authenticateToken = (req, res, next) => {
-        const token = req.headers['authorization'];
+        const token = req.headers['authorization']?.split(' ')[1]; // Ensure token is in correct format
         if (!token) return res.sendStatus(403);
 
         jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
             if (err) return res.sendStatus(403);
-            req.user = user;  
+            req.user = user;
+            next();
         });
     };
 
-    router.post('/create', authenticateToken, (req, res) => {
-        if (req.user.role !== 'admin') {
+    // Get all tasks for display
+
+    router.get('/', authenticateToken, (req, res) => {
+        if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized' });
         }
 
-        const { taskName, description, assigned_user_id } = req.body;
+        const query = `
+            SELECT tasks.id, tasks.task_name, tasks.task_description, tasks.location, tasks.status, 
+            tasks.assigned_user_id, users.first_name, users.last_name 
+            FROM tasks 
+            LEFT JOIN users ON tasks.assigned_user_id = users.id
+        `;
 
-        const query = 'INSERT INTO tasks (taskName, description, assigned_user_id) VALUES (?, ?, ?)';
-        db.query(query, [taskName, description, assigned_user_id], (err) => {
-            if (err) {
-                return res.status(500).json({ error: 'Database error' });
-            }
-            res.json({ message: 'Task created successfully!' });
-        });
-    });
-
-    router.get('/my-tasks', authenticateToken, (req, res) => {
-        const query = 'SELECT * FROM tasks WHERE assigned_user_id = ?';
-        db.query(query, [req.user.userId], (err, results) => {
+        db.query(query, (err, results) => {
             if (err) {
                 return res.status(500).json({ error: 'Database error' });
             }
             res.json(results);
         });
     });
+    // router.get('/', authenticateToken, (req, res) => {
+    //     if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
+    //         return res.status(403).json({ error: 'Unauthorized' });
+    //     }
+    
+    //     const query = 'SELECT * FROM tasks';
+    //     db.query(query, (err, results) => {
+    //         if (err) {
+    //             return res.status(500).json({ error: 'Database error' });
+    //         }
+    //         res.json(results);
+    //     });
+    // });
 
-    router.put('/tasks/:taskId/status', authenticateToken, (req, res) => {
-        const { taskId } = req.params;
-        const { status } = req.body;
-
-        const query = 'UPDATE tasks SET status = ? WHERE id = ? AND assigned_user_id = ?';
-        db.query(query, [status, taskId, req.user.userId], (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: 'Database error' });
-            }
-
-            if (result.affectedRows === 0) {
-                return res.status(403).json({ error: 'Unauthorized or task not found' });
-            }
-
-            res.json({ message: 'Task status updated successfully' });
-        });
-    });
-
+    // Fetch all employees
     router.get('/employees', authenticateToken, (req, res) => {
-        if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
-            return res.status(403).json({ error: 'Unauthorized' });
-        }
-
-        const query = 'SELECT id, first_name, last_name FROM users WHERE role = "employee" AND company = ?';
-        db.query(query, [req.user.company], (err, results) => {
+        const query = 'SELECT id, first_name, last_name FROM users'; // Fetch all users
+        db.query(query, (err, results) => {
             if (err) {
                 return res.status(500).json({ error: 'Database error' });
             }
-            res.json(results);
+            res.json(results); // Return all users
         });
     });
 
-    router.get('/tasks', authenticateToken, (req, res) => {
-        if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
-            return res.status(403).json({ error: 'Unauthorized' });
+// Route to assign tasks to employees with location
+router.post('/assign-task', authenticateToken, (req, res) => {
+    if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
+        return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    const { employeeId, taskName, taskDescription, location } = req.body;
+    const assignedUserId = employeeId || null; // Allow unassigned tasks by setting null
+
+    const query = 'INSERT INTO tasks (task_name, task_description, assigned_user_id, location, status) VALUES (?, ?, ?, ?, "pending")';
+    db.query(query, [taskName, taskDescription, assignedUserId, location], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
         }
-
-        const query = 'SELECT id, taskName AS name, description, assigned_user_id AS assigned_employee FROM tasks WHERE company = ?';
-        db.query(query, [req.user.company], (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: 'Database error' });
-            }
-            res.json(results);
-        });
+        res.json({ message: 'Task assigned successfully!' });
     });
+});
 
 
-    router.post('/assign-task', authenticateToken, (req, res) => {
-        if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
-            return res.status(403).json({ error: 'Unauthorized' });
+
+
+
+
+// Fetch tasks for the logged-in employee
+router.get('/my-tasks', authenticateToken, (req, res) => {
+    if (req.user.role !== 'employee') {
+        return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    const query = 'SELECT * FROM tasks WHERE assigned_user_id = ?';
+    db.query(query, [req.user.userId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
         }
-
-        const { employeeId, taskName, taskDescription } = req.body;
-
-        // employees company == event manager
-        const checkUserQuery = 'SELECT * FROM users WHERE id = ? AND company = ?';
-        db.query(checkUserQuery, [employeeId, req.user.company], (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: 'Database error' });
-            }
-
-            if (results.length === 0) {
-                return res.status(400).json({ error: 'Employee does not belong to your company' });
-            }
-
-            // Insert task 
-            const query = 'INSERT INTO tasks (taskName, description, assigned_user_id, company) VALUES (?, ?, ?, ?)';
-            db.query(query, [taskName, taskDescription, employeeId, req.user.company], (err, result) => {
-                if (err) {
-                    return res.status(500).json({ error: 'Database error' });
-                }
-                res.json({ message: 'Task assigned successfully!' });
-            });
-        });
+        res.json(results);
     });
+});
+
+// Fetch unassigned tasks for employees to see
+router.get('/unassigned-tasks', authenticateToken, (req, res) => {
+    if (req.user.role !== 'employee') {
+        return res.status(403).json({ error: 'Unauthorized' });
+    }
+
+    const query = 'SELECT * FROM tasks WHERE assigned_user_id IS NULL';
+    db.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.json(results);
+    });
+});
+
+
+
 
     return router;
 };
+
+
+
+

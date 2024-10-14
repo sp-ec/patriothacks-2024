@@ -6,19 +6,19 @@ const router = express.Router();
 
 module.exports = (db) => {
 
-    // Middleware to check for authenticated users
     const authenticateToken = (req, res, next) => {
-        const token = req.headers['authorization'];
-        if (!token) return res.sendStatus(403);
-
+        const token = req.headers['authorization']?.split(' ')[1]; // Extract the token from 'Bearer <token>'
+        if (!token) return res.sendStatus(403); // Forbidden if no token
+    
         jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-            if (err) return res.sendStatus(403);
+            if (err) return res.sendStatus(403); // Forbidden if token is invalid
             req.user = user;  // Add user info to request
-            next();
+            next(); // Proceed if token is valid
         });
     };
+    
 
-    // Route for creating a team
+
     router.post('/create-team', authenticateToken, (req, res) => {
         if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized' });
@@ -35,7 +35,7 @@ module.exports = (db) => {
         });
     });
 
-    // Route for fetching teams for admin, filtered by company
+
     router.get('/admin/teams', authenticateToken, (req, res) => {
         if (req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized' });
@@ -50,7 +50,7 @@ module.exports = (db) => {
         });
     });
 
-    // Fetch tasks for a team (admin view)
+
     router.get('/admin/team-tasks/:teamId', authenticateToken, (req, res) => {
         if (req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized' });
@@ -66,7 +66,6 @@ module.exports = (db) => {
         });
     });
 
-    // Route for assigning employees to teams
     router.post('/assign-to-team', authenticateToken, (req, res) => {
         if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized' });
@@ -88,22 +87,19 @@ module.exports = (db) => {
         });
     });
 
-    // Fetch employees for the event manager's company
-    router.get('/employees', authenticateToken, (req, res) => {
-        if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
-            return res.status(403).json({ error: 'Unauthorized' });
-        }
 
-        const query = 'SELECT id, first_name, last_name FROM users WHERE role = "employee" AND company = ?';
-        db.query(query, [req.user.company], (err, results) => {
+    router.get('/employees', authenticateToken, (req, res) => {
+        const query = 'SELECT id, first_name, last_name FROM users'; // Fetch all users, not filtered by company for now
+        db.query(query, (err, results) => {
             if (err) {
                 return res.status(500).json({ error: 'Database error' });
             }
-            res.json(results);
+            res.json(results); // Return all users
         });
     });
 
-    // assigning to employee: link to teams 
+
+
     router.post('/assign-task', authenticateToken, (req, res) => {
         if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized' });

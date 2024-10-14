@@ -4,23 +4,27 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Landing from './pages/Landing';
-import AdminDashboard from './pages/AdminDashboard';  // Add this
-import EmployeeDashboard from './pages/EmployeeDashboard';  // Add this
-import EventManagerDashboard from './pages/EventManagerDashboard'; // Add this
-import Main from './pages/Main';
+import AdminDashboard from './pages/AdminDashboard';
+import EmployeeDashboard from './pages/EmployeeDashboard';
+import EventManagerDashboard from './pages/EventManagerDashboard';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/main" element={<Main />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/admin-dashboard" element={<AdminDashboard />} /> 
+                <Route path="/employee-dashboard" element={<EmployeeDashboard />} /> 
+                <Route path="/event-manager-dashboard" element={<EventManagerDashboard />} /> 
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
+
 
 
 

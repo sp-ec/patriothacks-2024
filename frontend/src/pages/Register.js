@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // <-- Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import cityscapeImage from '../images/sky.webp';
 
 const Register = () => {
@@ -8,12 +8,12 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [role, setRole] = useState('employee'); // Default role
+    const [role, setRole] = useState('employee'); 
     const [company, setCompany] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-    const navigate = useNavigate(); // <-- useNavigate hook for redirect
+    const navigate = useNavigate(); 
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -41,10 +41,10 @@ const Register = () => {
                 setSuccess(data.message);
                 setError('');
 
-                // Redirect to login after successful registration
+             
                 setTimeout(() => {
-                    navigate('/login'); // <-- Redirect to login page
-                }, 2000); // 2 second delay before redirect
+                    navigate('/login'); 
+                }, 2000);
             } else {
                 setError(data.error);
                 setSuccess('');
@@ -138,7 +138,7 @@ const Register = () => {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="company" className="block text-xl text-neonPurple">Company (optional)</label>
+                        <label htmlFor="company" className="block text-xl text-neonPurple">Company</label>
                         <input
                             id="company"
                             name="company"
