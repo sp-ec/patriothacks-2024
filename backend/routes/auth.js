@@ -183,6 +183,38 @@ module.exports = (db) => {
         });
     });
 
+
+    // Add these routes to your `auth.js`
+
+    // Route to get user profile info (this can include name, availability, etc.)
+    router.get('/profile', authenticateToken, (req, res) => {
+        const query = 'SELECT first_name, last_name, availability FROM users WHERE id = ?';
+        db.query(query, [req.user.userId], (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: 'Database error' });
+            }
+            if (results.length === 0) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            res.json(results[0]);
+        });
+    });
+
+    // Route to update user availability
+    router.put('/update-availability', authenticateToken, (req, res) => {
+        const { availability } = req.body;
+        const query = 'UPDATE users SET availability = ? WHERE id = ?';
+        db.query(query, [availability, req.user.userId], (err, result) => {
+            if (err) {
+                return res.status(500).json({ error: 'Database error' });
+            }
+            res.json({ message: 'Availability updated successfully!' });
+        });
+    });
+
+
+
+
     // User registration
     router.post('/register', async (req, res) => {
         const { username, email, password, first_name, last_name, role, company } = req.body;

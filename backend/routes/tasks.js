@@ -62,17 +62,14 @@ module.exports = (db) => {
         });
     });
 
-// Route to assign tasks to employees with location
-router.post('/assign-task', authenticateToken, (req, res) => {
-    if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
-        return res.status(403).json({ error: 'Unauthorized' });
-    }
 
-    const { employeeId, taskName, taskDescription, location } = req.body;
+router.post('/assign-task', authenticateToken, (req, res) => {
+    const { employeeId, taskName, taskDescription, taskLocation } = req.body; // Include location
+
     const assignedUserId = employeeId || null; // Allow unassigned tasks by setting null
 
     const query = 'INSERT INTO tasks (task_name, task_description, assigned_user_id, location, status) VALUES (?, ?, ?, ?, "pending")';
-    db.query(query, [taskName, taskDescription, assignedUserId, location], (err, result) => {
+    db.query(query, [taskName, taskDescription, assignedUserId, taskLocation], (err, result) => {
         if (err) {
             return res.status(500).json({ error: 'Database error' });
         }
@@ -112,6 +109,26 @@ router.get('/unassigned-tasks', authenticateToken, (req, res) => {
             return res.status(500).json({ error: 'Database error' });
         }
         res.json(results);
+    });
+});
+
+
+// Route to update task status
+router.put('/:taskId/status', authenticateToken, (req, res) => {
+    const { taskId } = req.params;
+    const { status } = req.body;
+
+    if (!['in_progress', 'completed'].includes(status)) {
+        return res.status(400).json({ error: 'Invalid status' });
+    }
+
+    const query = 'UPDATE tasks SET status = ? WHERE id = ?';
+    db.query(query, [status, taskId], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+
+        res.json({ message: 'Task status updated successfully' });
     });
 });
 

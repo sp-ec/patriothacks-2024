@@ -99,7 +99,6 @@ module.exports = (db) => {
     });
 
 
-
     router.post('/assign-task', authenticateToken, (req, res) => {
         if (req.user.role !== 'event_manager' && req.user.role !== 'admin') {
             return res.status(403).json({ error: 'Unauthorized' });

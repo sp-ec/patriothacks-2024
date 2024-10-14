@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import NavBar from '../components/NavBar';  // Import NavBar
 
 const AdminDashboard = () => {
     const [teams, setTeams] = useState([]);
@@ -49,8 +50,8 @@ const AdminDashboard = () => {
 
     return (
         <div className="min-h-screen bg-neutral-900 text-white p-10">
+            <NavBar />  
             <h1 className="text-4xl mb-8">Admin Dashboard</h1>
-
             <div className="flex">
                 <div className="w-1/4 bg-neutral-800 p-6 rounded-lg shadow-lg">
                     <h2 className="text-2xl mb-4 text-neonPurple">Teams</h2>
