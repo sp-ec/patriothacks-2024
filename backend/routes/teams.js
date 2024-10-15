@@ -89,7 +89,7 @@ module.exports = (db) => {
 
 
     router.get('/employees', authenticateToken, (req, res) => {
-        const query = 'SELECT id, first_name, last_name FROM users'; // Fetch all users, not filtered by company for now
+        const query = 'SELECT id, first_name, last_name, availability FROM users'; // Fetch all users, not filtered by company for now
         db.query(query, (err, results) => {
             if (err) {
                 return res.status(500).json({ error: 'Database error' });
@@ -97,6 +97,7 @@ module.exports = (db) => {
             res.json(results); // Return all users
         });
     });
+
 
 
     router.post('/assign-task', authenticateToken, (req, res) => {
