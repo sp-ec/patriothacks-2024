@@ -5,7 +5,7 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks');
-const teamRoutes = require('./routes/teams');  // Make sure this is being used
+const teamRoutes = require('./routes/teams');  
 require("dotenv").config();
 
 app.use(cors());
@@ -16,7 +16,7 @@ app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept, Authorization" // Add Authorization here
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization" 
     );
     next();
 });
@@ -38,12 +38,12 @@ db.connect((err) => {
     console.log('Connected to the MySQL database');
 });
 
-// Register your routes here
-app.use('/api', authRoutes(db));           // Auth routes
-app.use('/api/tasks', taskRoutes(db));     // Task routes
-app.use('/api/teams', teamRoutes(db));     // Team routes - includes employees
 
-// Start the server
+app.use('/api', authRoutes(db));          
+app.use('/api/tasks', taskRoutes(db));     
+app.use('/api/teams', teamRoutes(db));     
+
+
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
 });

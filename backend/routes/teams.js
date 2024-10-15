@@ -94,7 +94,7 @@ module.exports = (db) => {
             if (err) {
                 return res.status(500).json({ error: 'Database error' });
             }
-            res.json(results); // Return all users
+            res.json(results); 
         });
     });
 

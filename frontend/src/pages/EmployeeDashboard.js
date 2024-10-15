@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker } from '@react-google-maps/api'; 
+//import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import NavBar from '../components/NavBar';
 
 const EmployeeDashboard = () => {
@@ -151,18 +152,13 @@ const EmployeeDashboard = () => {
                                 <option value="away">Away</option>
                             </select>
                         </p>
-
-                        <LoadScript googleMapsApiKey="YOUR_GOOGLE_MAPS_API_KEY">
-                            <GoogleMap
-                                mapContainerStyle={{ height: "300px", width: "100%" }}
-                                zoom={15}
-                                center={currentPosition}
-                            >
-                                {currentPosition.lat && (
-                                    <Marker position={currentPosition} />
-                                )}
-                            </GoogleMap>
-                        </LoadScript>
+                        <GoogleMap
+                            mapContainerStyle={{ height: "300px", width: "100%" }}
+                            zoom={15}
+                            center={currentPosition} // Use currentPosition
+                        >
+                            <Marker position={currentPosition} />
+                        </GoogleMap>
                     </div>
 
                     <div className="bg-neutral-800 p-6 rounded-lg shadow-lg">

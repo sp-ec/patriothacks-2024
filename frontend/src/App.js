@@ -7,9 +7,12 @@ import Landing from './pages/Landing';
 import AdminDashboard from './pages/AdminDashboard';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import EventManagerDashboard from './pages/EventManagerDashboard';
+import { LoadScript } from '@react-google-maps/api';
+
 
 function App() {
     return (
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
         <Router>
             <Routes>
                 <Route path="/" element={<Landing />} />
@@ -20,6 +23,7 @@ function App() {
                 <Route path="/event-manager-dashboard" element={<EventManagerDashboard />} /> 
             </Routes>
         </Router>
+        </LoadScript>
     );
 }
 

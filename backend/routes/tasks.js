@@ -66,7 +66,7 @@ module.exports = (db) => {
 router.post('/assign-task', authenticateToken, (req, res) => {
     const { employeeId, taskName, taskDescription, taskLocation } = req.body; // Include location
 
-    const assignedUserId = employeeId || null; // Allow unassigned tasks by setting null
+    const assignedUserId = employeeId || null; 
 
     const query = 'INSERT INTO tasks (task_name, task_description, assigned_user_id, location, status) VALUES (?, ?, ?, ?, "pending")';
     db.query(query, [taskName, taskDescription, assignedUserId, taskLocation], (err, result) => {

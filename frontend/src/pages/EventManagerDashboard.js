@@ -188,7 +188,6 @@ const EventManagerDashboard = () => {
                     </form>
                 </div>
     
-                {/* Sidebar for Tasks */}
                 <div className="w-1/4 pl-8">
                     <h2 className="text-2xl font-bold mb-4">Tasks</h2>
                     <h3 className="text-xl font-semibold mb-2">Pending</h3>
